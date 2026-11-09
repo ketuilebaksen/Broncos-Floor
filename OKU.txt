@@ -1,0 +1,122 @@
+BRONCOS FLOOR — KANAL KURULUMU
+===============================
+
+Takim: Denver Broncos | Stadyum: Empower Field at Mile High
+Bas antrenor SEAN PAYTON, genel menajer George Paton.
+
+Kadroda Bo Nix, Courtland Sutton, Jaylen Waddle, Evan Engram,
+J.K. Dobbins, Pat Surtain II, Nik Bonitto, Zach Allen, Talanoa Hufanga.
+
+BU SEZONUN BUYUK HAREKETI: Jaylen Waddle Miami'den takasla geldi —
+Denver 2026'nin 1., 3. ve 4. tur secimlerini verdi. Hucum koordinatoru
+artik Davis Webb (Joe Lombardi'nin yerine). J.K. Dobbins 2 yil 16 milyon
+ile kaldi.
+
+NOT: Taylor Rapp 6 Kasim'da kadrodan cikarildi, listeye koymadim.
+Sakatlik listesindeki RJ Harvey ve Jonah Elliss'i de koymadim; donerlerse
+soyle, channel.json'a eklerim.
+
+
+DEPO ADI — DIKKAT
+-----------------
+GitHub depo adinda BOSLUK kabul etmiyor. "Broncos Floor" yazdiysan GitHub
+otomatik olarak "Broncos-Floor" yapmistir. Ses otomasyonuna eklerken
+deponun GitHub'da ustunde yazan tam adini kullan:
+
+  Broncos-Floor
+
+
+UZUNLUK — DIGER YENI KANALLARLA AYNI
+------------------------------------
+25.000 karakterlik (~28 dakikalik) videolara gore kuruldu:
+
+  body_cut          3.9    (kisa videolu kanallarda 3.4)
+  overlay_every_sec 30     (onlarda 25)
+  BROLL_SAMPLE      420    (onlarda 320)
+
+>>> broll release'ine EN AZ 500 klip koy. 420'den az klip varsa sistem
+    elindekini kullanir ama tekrara baslar.
+
+Kisa video (3-5 dakika) istiyorsan channel.json'da iki degeri degistir:
+  "body_cut": 3.4
+  "overlay_every_sec": 25
+
+RENDER SURESI: 75-100 dakika. Is siniri 330 dakika, sorun degil.
+DOSYA BOYUTU: ~1 GB civari, GitHub'in 2 GB sinirinin altinda.
+
+
+ADIM 1 — DEPO
+-------------
+"Add a README" isaretlediysen push ederken "unrelated histories" ya da
+"Newer commits on remote" hatasi cikacak. Pull / Fetch'e BASMA, Cancel de:
+
+  Repository -> Open in Command Prompt   (Ctrl + `)
+  git push --force origin main
+
+Enter, sonra GitHub Desktop'ta Ctrl + R.
+
+
+ADIM 2 — DOSYALARI KOPYALA
+--------------------------
+Bu zip'in icindekileri (OKU.txt haric) depo klasorune kopyala.
+
+Klasorde su kalmali:
+  .git  .github  assets  content  scripts  .gitignore  channel.json
+
+.github ve content Windows'ta gizli gorunebilir — Explorer'da
+"Hidden items" kutusunu ac.
+
+GitHub Desktop -> Summary: "ilk kurulum" -> Commit to main -> Push origin
+
+
+ADIM 3 — IZIN (sart)
+--------------------
+Settings -> Actions -> General -> en altta "Workflow permissions"
+"Read and write permissions" sec -> Save
+
+Bu olmadan video render edilir ama Release'e yuklenemez.
+
+
+ADIM 4 — STOK VIDEOLAR
+----------------------
+Releases -> Create a new release
+  Tag / Title : broll
+  Dosya       : Broncos stok videolarini surukle (en az 500)
+  ---> "Publish release"   ("Save draft" e BASMA)
+
+Bir release'e 1000 dosya siginiyor, dolunca broll2 ac — sistem broll ile
+baslayan butun release'leri tek havuz sayiyor.
+
+Istege bagli:  music   ambient   photos
+
+music'e hem mp3 hem wav atabilirsin, sistem kopyalari birlestiriyor.
+28 dakikalik video icin en az 10-12 parca koy.
+
+
+ADIM 5 — ILK VIDEO
+------------------
+Ses otomasyonunda kanal listesine ekle, depo adi: Broncos-Floor
+
+Render kaydinda goreceklerin:
+  STOK HAVUZU: ... klipten 420 tanesi bu video icin secildi
+  [assemble] b-roll: ... clips (offset ...)
+  [assemble] sahne cesitliligi: ... farkli cekim ailesi
+  [assemble] music bed: ... parca, ... kez eklendi
+  [assemble] DONE -> work/final.mp4
+
+"b-roll: 0 clips" yaziyorsa broll release'i taslakta kalmis demektir.
+
+
+TEMPO AYARLARI
+--------------
+Ilk videoyu izledikten sonra oynayabilecegin uc deger:
+  "hook_cut": 2.8           acilisin kesim hizi
+  "body_cut": 3.9           govdenin kesim hizi (dusuk = daha hizli)
+  "overlay_every_sec": 30   ekrana yazi gelme sikligi
+
+
+ISTEGE BAGLI — TEK OYUNCUYA OZEL HAVUZ
+--------------------------------------
+  Release tag : oyuncu-bo-nix   (ya da takim-denver-broncos)
+  Icine en az 12 klip koy, Publish et.
+Metinde o isim en cok geciyorsa video sadece o havuzdan kurulur.
